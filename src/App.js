@@ -11,10 +11,12 @@ const Container = styled.div`
     margin:8px;
     border:1px solid lightgrey;
     border-radius:2px;
+    transition:background-color 0.2 ease;
     
 `;
 const TaskList = styled.div`
     padding:8px;
+    
 `;
 
 
@@ -84,38 +86,43 @@ function App() {
         if (!result.destination) {
             return;
         }
+        document.body.style.color = 'inherit';
         const CopiedList = list.slice()
         const itemDestination = CopiedList[result.destination.index]
-        const itemSource = CopiedList[result.source.index]
-        CopiedList[result.destination.index] = itemSource
+        CopiedList[result.destination.index] = CopiedList[result.source.index]
         CopiedList[result.source.index] = itemDestination
         setList(CopiedList)
 
 
     }
+    const onDragStart = () => {
+        document.body.style.color = 'orange';
+    }
 
     return (
-        <div className="App">
-            <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+            <div className="App">
+
                 <Droppable droppableId="Droppable" key={uuid}>
                     {(provided, snapshot) => (
-                        <TaskList>
+
                         <Container
                             ref={provided.innerRef}
-                            style={{backgroundColor: snapshot.isDraggingOver ? 'white' : 'white'}}
+                            style={{backgroundColor: snapshot.isDraggingOver ? 'skyblue' : 'white'}}
                             {...provided.droppableProps}
                         >
                             <TodoCreateForm ChangeList={ChangeList}/>
                             <TodoList list={list} ChangeDeleteId={ChangeDeleteId} ChangeIndex={ChangeIndex}/>
                             {provided.placeholder}
                         </Container>
-                        </TaskList>
+
                     )}
 
                 </Droppable>
-            </DragDropContext>
+            </div>
+        </DragDropContext>
 
-        </div>
+
     );
 }
 

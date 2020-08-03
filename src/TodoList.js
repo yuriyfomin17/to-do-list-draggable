@@ -1,25 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import ButtonToDelete from "./ButtonToDelete";
 import styled from 'styled-components'
 import {Draggable} from 'react-beautiful-dnd'
 import uuid from "uuid-v4"
 
-
+const TaskList = styled.div`
+    padding:8px;
+`;
 const Container = styled.div`
     border:1px solid lightgrey;
     border-radius:2px;
     padding:8px;
     margin-bottom:8px;
-    background-color:white;
-    
+    background:${props =>(props.isDraggingOver?'lightgreen':'white')};
 `;
-const TaskList = styled.div`
-    padding:8px;
-`;
-
 
 function TodoList(props) {
+
+
     return (
         <div>
 
@@ -32,6 +31,9 @@ function TodoList(props) {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 ref={provided.innerRef}
+                                isDraggingOver={snapshot.isDragging}
+
+
                             >
                                 <ButtonToDelete key={el.id} title={el.title}
                                                 id={el.id} index={index}
