@@ -8,9 +8,13 @@ import uuid from "uuid-v4"
 
 
 const Container = styled.div`
-    margin:5px;
+    margin:8px;
     border:1px solid lightgrey;
-    border-radius:1px;
+    border-radius:2px;
+    
+`;
+const TaskList = styled.div`
+    padding:8px;
 `;
 
 
@@ -95,15 +99,17 @@ function App() {
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="Droppable" key={uuid}>
                     {(provided, snapshot) => (
+                        <TaskList>
                         <Container
                             ref={provided.innerRef}
-                            style={{backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey'}}
+                            style={{backgroundColor: snapshot.isDraggingOver ? 'white' : 'white'}}
                             {...provided.droppableProps}
                         >
                             <TodoCreateForm ChangeList={ChangeList}/>
                             <TodoList list={list} ChangeDeleteId={ChangeDeleteId} ChangeIndex={ChangeIndex}/>
                             {provided.placeholder}
                         </Container>
+                        </TaskList>
                     )}
 
                 </Droppable>
