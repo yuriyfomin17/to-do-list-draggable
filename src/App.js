@@ -87,6 +87,7 @@ function App() {
             return;
         }
         document.body.style.color = 'inherit';
+        document.body.style.backgroundColor ='inherit'
         const CopiedList = list.slice()
         const itemDestination = CopiedList[result.destination.index]
         CopiedList[result.destination.index] = CopiedList[result.source.index]
@@ -99,8 +100,15 @@ function App() {
         document.body.style.color = 'orange';
     }
 
+    const onDragUpdate = (update)=>{
+        const {destination} = update;
+        const opacity = destination ? (destination.index/list.length):0
+        document.body.style.backgroundColor=`rgba(153,141,217, ${opacity})`;
+
+    }
+
     return (
-        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} onDragUpdate={onDragUpdate}>
             <div className="App">
 
                 <Droppable droppableId="Droppable" key={uuid}>
