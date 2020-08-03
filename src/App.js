@@ -14,10 +14,7 @@ const Container = styled.div`
     transition:background-color 0.2 ease;
     
 `;
-const TaskList = styled.div`
-    padding:8px;
-    
-`;
+
 
 
 const initialList = [
