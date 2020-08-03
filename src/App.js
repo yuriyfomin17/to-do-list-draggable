@@ -1,8 +1,17 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TodoCreateForm from "./TodoCreateForm";
 import TodoList from "./TodoList";
+import styled from 'styled-components'
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import uuid from "uuid-v4"
+
+
+const Container = styled.div`
+    margin:5px;
+    border:1px solid lightgrey;
+    border-radius:1px;
+`;
 
 
 const initialList = [
@@ -67,12 +76,38 @@ function App() {
         }
         setList(CopiedList)
     }
+    const onDragEnd = (result) => {
+        if (!result.destination) {
+            return;
+        }
+        const CopiedList = list.slice()
+        const itemDestination = CopiedList[result.destination.index]
+        const itemSource = CopiedList[result.source.index]
+        CopiedList[result.destination.index] = itemSource
+        CopiedList[result.source.index] = itemDestination
+        setList(CopiedList)
+
+
+    }
 
     return (
         <div className="App">
-            <TodoCreateForm ChangeList={ChangeList}/>
-            <TodoList list={list} ChangeDeleteId={ChangeDeleteId} ChangeIndex={ChangeIndex}/>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="Droppable" key={uuid}>
+                    {(provided, snapshot) => (
+                        <Container
+                            ref={provided.innerRef}
+                            style={{backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey'}}
+                            {...provided.droppableProps}
+                        >
+                            <TodoCreateForm ChangeList={ChangeList}/>
+                            <TodoList list={list} ChangeDeleteId={ChangeDeleteId} ChangeIndex={ChangeIndex}/>
+                            {provided.placeholder}
+                        </Container>
+                    )}
 
+                </Droppable>
+            </DragDropContext>
 
         </div>
     );

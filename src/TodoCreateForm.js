@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components'
+
+
+const Title = styled.h3`
+    padding:8px;
+`
 
 function TodoCreateForm(props) {
     const [inputValue, setInputValue] = useState()
@@ -16,12 +20,13 @@ function TodoCreateForm(props) {
 
     return (
         <div>
-            To do Create Form
-            <input value={inputValue} onChange={inputOnChange}/>
+            <Title>
+                <input value={inputValue} onChange={inputOnChange}/>
 
-            <button onClick={onCreate}>
-                Create
-            </button>
+                <button onClick={onCreate}>
+                    Create
+                </button>
+            </Title>
         </div>
     );
 }
