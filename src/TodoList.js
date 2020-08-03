@@ -40,7 +40,9 @@ function TodoList(props) {
                                                 listLength={props.list.length}
                                                 ChangeDeleteId={props.ChangeDeleteId}
                                                 color={"btn btn-info"}
-                                                changeIndex={props.ChangeIndex}/>
+                                                changeIndex={props.ChangeIndex}
+
+                                />
 
                             </Container>
                         </TaskList>

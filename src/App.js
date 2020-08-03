@@ -9,7 +9,7 @@ import uuid from "uuid-v4"
 
 const Container = styled.div`
     margin:8px;
-    border:1px solid lightgrey;
+    border:3px solid lightgrey;
     border-radius:2px;
     transition:background-color 0.2 ease;
     
@@ -108,6 +108,7 @@ function App() {
     }
 
     return (
+        <center>
         <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} onDragUpdate={onDragUpdate}>
             <div className="App">
 
@@ -119,7 +120,7 @@ function App() {
                             style={{backgroundColor: snapshot.isDraggingOver ? 'skyblue' : 'white'}}
                             {...provided.droppableProps}
                         >
-                            <TodoCreateForm ChangeList={ChangeList}/>
+                            <TodoCreateForm ChangeList={ChangeList} listLength={list.length}/>
                             <TodoList list={list} ChangeDeleteId={ChangeDeleteId} ChangeIndex={ChangeIndex}/>
                             {provided.placeholder}
                         </Container>
@@ -129,6 +130,7 @@ function App() {
                 </Droppable>
             </div>
         </DragDropContext>
+        </center>
 
 
     );

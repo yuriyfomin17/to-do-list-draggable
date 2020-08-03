@@ -2,12 +2,13 @@ import React, {useState} from "react";
 
 const ShowInput = (props) => {
     if (props.Button) {
-        return (<>
-            <input onChange={(event)=>props.Change(event)}/>
-            <button onClick={(event) => props.Create(event)}>Save</button>
-        </>);
+        return (<p>
+            <input type="text" className=" input-group-sm" onChange={(event) => props.Change(event)}/>
+            <button type="button" className=" btn-primary btn-sm" onClick={(event) => props.Create(event)}>Save</button>
+
+        </p>);
     } else {
-        return <button onClick={props.changeButton}>edit</button>
+        return <button className="btn-primary btn-sm" onClick={props.changeButton}>edit</button>
     }
     // eslint-disable-next-line no-unreachable
 
@@ -22,9 +23,9 @@ function InputEditWindow(props) {
         SetInput(event.target.value)
 
     }
-    const Create = ()=> {
+    const Create = () => {
 
-        props.ChangeDeleteId(props.id, "change",inputValue )
+        props.ChangeDeleteId(props.id, "change", inputValue)
         setButton(!Button)
     }
 
@@ -34,7 +35,9 @@ function InputEditWindow(props) {
 
     return (
 
+
             <ShowInput Button={Button} checkEvent={Change} changeButton={changeButton} Create={Create} Change={Change}/>
+
 
 
     )

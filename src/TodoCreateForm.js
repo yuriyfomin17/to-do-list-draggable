@@ -9,7 +9,6 @@ const Title = styled.h3`
 function TodoCreateForm(props) {
     const [inputValue, setInputValue] = useState()
     const inputOnChange = e => {
-        console.log(e.target)
         setInputValue(e.target.value)
 
     }
@@ -19,15 +18,24 @@ function TodoCreateForm(props) {
     }
 
     return (
-        <div>
-            <Title>
-                <input value={inputValue} onChange={inputOnChange}/>
+        <center>
+            <div>
 
-                <button onClick={onCreate}>
-                    Create
-                </button>
-            </Title>
-        </div>
+                <Title>
+
+                    <p className="input-group">
+                        <input type="text" className=" input-group-sm" value={inputValue} onChange={inputOnChange}/>
+
+                        <button type="button" className=" btn-primary btn-sm" onClick={onCreate}>
+                            Create <span className="badge badge-light">{props.listLength}</span>
+                        </button>
+                    </p>
+
+                </Title>
+
+            </div>
+        </center>
+
     );
 }
 
